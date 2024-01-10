@@ -11,6 +11,7 @@ import Camera from './Camera.js'
 import Lights from './Lights.js'
 import Structure from './Structure.js'
 import Plane from './Plane.js'
+import Floor from './Floor.js'
 import MeshManager from './MeshManager.js'
 
 import ScrollEvent from './ScrollEvent.js'
@@ -68,6 +69,7 @@ export default class Experience
                 }
             })
             this.setPlane()
+            this.setFloor()
             this.setMeshManager(this.meshs)
         })
 
@@ -159,6 +161,10 @@ export default class Experience
     {
         this.plane = new Plane()
     }
+    setFloor()
+    {
+        this.floor = new Floor()
+    }
     setMeshManager(mesh)
     {
         this.meshManager = new MeshManager(mesh)
@@ -190,6 +196,9 @@ export default class Experience
 
         if(this.plane)
             this.plane.update()
+
+        if(this.floor)
+            this.floor.update()
 
         if(this.meshManager)
             this.meshManager.update()

@@ -95,6 +95,7 @@ export default class Resources extends EventEmitter
                 fbxLoader.load(_resource.source, (_data) =>
                 {
                     this.fileLoadEnd(_resource, _data)
+
                 })
             }
         })

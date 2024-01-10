@@ -78,7 +78,7 @@ export default class Structure
 
     update()
     {
-        this._scroll = this._scrollEvent.currentScroll
+        this._scroll = this._scrollEvent.current
         this.setPosition(this._scroll)
     }
 

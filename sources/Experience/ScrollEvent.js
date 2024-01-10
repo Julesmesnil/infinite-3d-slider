@@ -1,3 +1,4 @@
+import { MathUtils } from 'three'
 import Experience from './Experience.js'
 
 export default class ScrollEvent
@@ -10,13 +11,13 @@ export default class ScrollEvent
         this.resources = this.experience.resources
         this.debug = this.experience.debug
 
-        this.scroll = 0;
-        this.scrollTarget = 0;
-        this.currentScroll = 0;
-        this._scrollSpeed = 0.003;
-        this.velocity = 0;
+        this.target = 0
+        this.current = 0
+        this.speed = 0.05
+        this.factor = 0.005
+        this.velocity = 0
 
-        this.scrollEvent();
+        this.scrollEvent()
         
         // debug
         if(this.debug)
@@ -25,7 +26,7 @@ export default class ScrollEvent
             this.debugFolder.close()
 
             // change this.modes.debug.instance position and rotation
-            this.debugFolder.add(this, '_scrollSpeed').step(0.001).min(0).max(0.01).name('Scroll Factor')
+            this.debugFolder.add(this, 'factor').step(0.001).min(0).max(0.01).name('Scroll Factor')
         }
     }
 
@@ -33,7 +34,7 @@ export default class ScrollEvent
     {
         window.addEventListener('mousewheel', (e) =>
         {
-            this.scrollTarget = e.wheelDelta * 0.3;
+            this.target += e.deltaY * this.factor;
         })
     }
  
@@ -44,20 +45,8 @@ export default class ScrollEvent
 
     update()
     {
-        this.scroll += (this.scrollTarget - this.scroll) * 0.1;
-        this.scroll *= 0.9;
-        this.scrollTarget *= 0.9;
-        this.currentScroll -= this.scroll * this._scrollSpeed;
-        // console.log(this.scroll, 'scroll');
-        // console.log(this.currentScroll, 'currentScroll');
-        // console.log(this.scrollTarget, 'scrollTarget');
-        if (this.scroll < 0) {
-            this.velocity = -1;
-        } else if (this.scroll > 1) {
-            this.velocity = 1;
-        } else {
-            this.velocity = 0;
-        }
+        this.velocity = this.current - this.target;
+        this.current = MathUtils.lerp(this.current, this.target, this.speed);
     }
 
     destroy()

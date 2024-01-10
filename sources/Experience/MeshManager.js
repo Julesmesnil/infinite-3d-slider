@@ -39,7 +39,7 @@ export default class MeshManager
     _createMeshs() 
     {
         this._material = new MeshStandardMaterial({ 
-            color: 0x211400, 
+            color: 0x111111, 
             fog: true, 
             roughness: 0.5, 
             metalness: 0.2, 
@@ -60,7 +60,7 @@ export default class MeshManager
 
             this._scene.add(this._mesh)
 
-            this._mesh.position.y = 2;
+            this._mesh.position.y = 1.5;
             this._mesh.position.x = .8;
 
             this._mesh.scale.set(.4, .4, .4);

@@ -1,4 +1,6 @@
-# Three.js - Infinite 3D Slider
+# Three.js - Template - Complex
+
+🚧 This template is under construction
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
