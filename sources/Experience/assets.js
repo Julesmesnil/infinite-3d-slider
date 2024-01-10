@@ -6,7 +6,7 @@ export default [
         [
             { name: 'lennaTexture', source: '/static/images/lenna.png', type: 'texture' },
             { name: 'water', source: '/static/images/water.png', type: 'texture' },
-            { name: 'paint1', source: '/static/images/paint1.png', type: 'texture' },
+            { name: 'paint1', source: '/static/images/paint.png', type: 'texture' },
             { name: 'paint2', source: '/static/images/paint2.png', type: 'texture' },
             { name: 'paint3', source: '/static/images/paint3.png', type: 'texture' },
             { name: 'paint4', source: '/static/images/paint4.png', type: 'texture' },
