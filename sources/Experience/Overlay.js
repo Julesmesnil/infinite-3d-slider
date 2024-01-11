@@ -30,7 +30,7 @@ export default class Overlay
                 uniform float uAlpha;
                 void main()
                 {
-                    gl_FragColor = vec4(0.0, 0.0, 0.0, uAlpha);
+                    gl_FragColor = vec4(0.0, 0.051, 0.13, uAlpha);
                 }
             `
         });
