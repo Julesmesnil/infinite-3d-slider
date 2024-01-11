@@ -18,7 +18,7 @@ export default class Overlay
         this.overlayMaterial = new ShaderMaterial({
             transparent: true,
             uniforms: {
-                uAlpha: { value: 0.5 }
+                uAlpha: { value: 1 }
             },
             vertexShader: `
                 void main()

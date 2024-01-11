@@ -13,6 +13,9 @@ export default class Resources extends EventEmitter
         this.experience = new Experience()
         this.overlay = this.experience.overlay
 
+        this._loadingBar = document.querySelector('.loading-bar')
+        this._loadingTitle = document.querySelector('.loading-title')
+
         // Items (will contain every resources)
         this.items = {}
 
@@ -29,7 +32,6 @@ export default class Resources extends EventEmitter
         this.loader.on('fileEnd', (_resource, _data) =>
         {
             let data = _data
-            console.log(_data)
 
             // Convert to texture
             if(_resource.type === 'texture')
@@ -46,6 +48,8 @@ export default class Resources extends EventEmitter
             // Progress and event
             this.groups.current.loaded++
             this.trigger('progress', [this.groups.current, _resource, data])
+            this.progressRatio = this.groups.current.loaded / this.groups.current.toLoad
+            this._loadingBar.style.transform = `scaleX(${this.progressRatio})`
         })
 
         // Loader all end event
@@ -62,12 +66,16 @@ export default class Resources extends EventEmitter
             }
             else
             {
-                console.log('Resources loaded')
                 this.trigger('end')
                 gsap.to(this.overlay.overlayMaterial.uniforms.uAlpha, {
                     duration: 3,
+                    delay: 1,
                     value: 0,
+                    ease: 'power3.inOut'
                 })
+                this._loadingBar.classList.add('ended')
+                this._loadingBar.style.transform = ''
+                this._loadingTitle.classList.add('ended')
             }
         })
     }
