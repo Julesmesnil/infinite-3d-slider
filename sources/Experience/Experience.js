@@ -9,6 +9,7 @@ import Resources from './Resources.js'
 import Renderer from './Renderer.js'
 import Camera from './Camera.js'
 import Lights from './Lights.js'
+import Overlay from './Overlay.js'
 import Structure from './Structure.js'
 import Plane from './Plane.js'
 import Floor from './Floor.js'
@@ -51,6 +52,8 @@ export default class Experience
         this.setDebug()
         this.setStats()
         this.setScene()
+        this.setOverlay()
+
         this.setCamera()
         this.setLights()
         this.setRenderer()
@@ -151,6 +154,11 @@ export default class Experience
     setResources()
     {
         this.resources = new Resources(assets)
+    }
+
+    setOverlay()
+    {
+        this.overlay = new Overlay()
     }
 
     setStructure(mesh)

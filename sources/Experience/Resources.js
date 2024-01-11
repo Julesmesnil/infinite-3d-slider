@@ -1,12 +1,17 @@
 import { Texture } from 'three'
 import EventEmitter from './Utils/EventEmitter.js'
 import Loader from './Utils/Loader.js'
+import gsap from 'gsap'
+import Experience from './Experience.js'
 
 export default class Resources extends EventEmitter
 {
     constructor(_assets)
     {
         super()
+
+        this.experience = new Experience()
+        this.overlay = this.experience.overlay
 
         // Items (will contain every resources)
         this.items = {}
@@ -24,6 +29,7 @@ export default class Resources extends EventEmitter
         this.loader.on('fileEnd', (_resource, _data) =>
         {
             let data = _data
+            console.log(_data)
 
             // Convert to texture
             if(_resource.type === 'texture')
@@ -56,7 +62,12 @@ export default class Resources extends EventEmitter
             }
             else
             {
+                console.log('Resources loaded')
                 this.trigger('end')
+                gsap.to(this.overlay.overlayMaterial.uniforms.uAlpha, {
+                    duration: 3,
+                    value: 0,
+                })
             }
         })
     }
